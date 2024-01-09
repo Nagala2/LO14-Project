@@ -2,13 +2,16 @@
 #between the server and the user history ($2)
 
 #Remove the exit file
-rm synchmodif
+if [ -f synchmodif ]; then
+	rm synchmodif
+fi
 
 #Use a for function to test if there is conflict between the two diff file
 #and ask the user if necessary
 k=0
 for i in $(cat $1 | cut -f 1 -d " ")
 do
+	echo "renté"
 	var=$(echo $i | cut -c 2- )
 	k=$(($k + 1))
 
@@ -30,20 +33,36 @@ do
 				read answer
 				if [ $answer -eq 1 ]
 				then
-					sed -n "${k}p" $1 >> synchmodif
+					echo $(sed -n "${k}p" $1) $(echo $1 | rev | cut -c 1) >> synchmodif
 				elif [ $answer -eq 2 ]
 				then
-					grep "$var" $2 >> synchmodif
+					echo $(grep "$var" $2) $(echo $2 | rev | cut -c 1)  >> synchmodif
 				fi
 			done
 		fi
 	else
 		#Write the rest of the lines in the exit file
-		sed -n "${k}p" $1 >> synchmodif
+		echo $(sed -n "${k}p" $1) $(echo $1 | rev | cut -c 1 ) >> synchmodif
 	fi
 done
-sort synchmodif
+
+for i in $(cat $2 | cut -f 1 -d " ")
+do
+        var=$(echo $i | cut -c 2- )
+        k=$(($k + 1))
+
+        #Check if there is a conflict between the diff files
+        if  grep "$var" $1
+        then
+		j++
+	else
+		echo $(sed -n "${k}p" $2) $(echo $2 | rev | cut -c 1 ) >> synchmodif
+	fi
+done
+
+sort -o synchmodif synchmodif
 
 #Debugging purposes
+echo "fichier synchmodif :"
 echo -e "\n"
 cat synchmodif

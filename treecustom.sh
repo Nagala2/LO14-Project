@@ -6,7 +6,6 @@ if [ -f $2 ]; then
 fi
 #create a list of all the folders and files with the find command
 liste=$(find $1)
-
 #use the for function to write the tree in a temporary file with the right format
 for i in $liste
 do
@@ -24,7 +23,9 @@ done
 #remove the first line with the main directory name to be able to compare the exit file
 tail -n +2 temp > $2
 
-
 #option for debugg purposes
+echo "Fichier  $2 :"
+echo -e "\n"
 cat $2
+echo -e  "\n"
 rm temp
