@@ -1,8 +1,9 @@
 #take in argument, the path of the main directory ($1) and the name of the exit file ($2)
 
 #remove the exit file
-rm $2
-
+if [ -f $2 ]; then
+	rm $2
+fi
 #create a list of all the folders and files with the find command
 liste=$(find $1)
 
