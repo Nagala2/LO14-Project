@@ -36,5 +36,4 @@ rm temp
 rm temp2
 
 #for debugging :
-
-cat diff$1$2
+# cat diff$1$2

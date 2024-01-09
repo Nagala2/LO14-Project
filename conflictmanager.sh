@@ -42,6 +42,7 @@ do
 		sed -n "${k}p" $1 >> synchmodif
 	fi
 done
+sort synchmodif
 
 #Debugging purposes
 echo -e "\n"

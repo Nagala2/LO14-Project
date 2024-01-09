@@ -17,19 +17,19 @@ do
 	then
 		if [  "$(echo $line | rev | cut -c 1)" == $1 ]
 		then
-			echo "rm arbre_S/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
+			echo "rm S/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
 		else
-			echo "rm arbre_$1/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
+			echo "rm $1/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
 		fi
 	elif [ "$(echo $line | cut -c 1)" == "*" ]
 	then
 		if [ "$(echo $line | rev | cut -c 1)" == $1 ]
 		then
-			echo "rm arbre_S/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
-			echo "cp arbre_$1/$(echo $line | cut -c 2- | cut -f 1 -d " ") arbre_S/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
+			echo "rm S/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
+			echo "cp $1/$(echo $line | cut -c 2- | cut -f 1 -d " ") S/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
 		else
-			echo "rm arbre_$1/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
-			echo "cp arbre_S/$(echo $line | cut -c 2- | cut -f 1 -d " ") arbre_$1/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
+			echo "rm $1/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
+			echo "cp S/$(echo $line | cut -c 2- | cut -f 1 -d " ") $1/$(echo $line | cut -c 2- | cut -f 1 -d " ")"
 		fi
 	fi
 done < synchmodif
