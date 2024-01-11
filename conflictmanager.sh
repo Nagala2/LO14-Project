@@ -11,7 +11,6 @@ fi
 k=0
 for i in $(cat $1 | cut -f 1 -d " ")
 do
-	echo "renté"
 	var=$(echo $i | cut -c 2- )
 	k=$(($k + 1))
 
@@ -60,9 +59,9 @@ do
 	fi
 done
 
-sort -o synchmodif synchmodif
+sort -o synchmodif synchmodif 2>/dev/null
 
 #Debugging purposes
 echo "fichier synchmodif :"
 echo -e "\n"
-cat synchmodif
+cat synchmodif 2>/dev/null

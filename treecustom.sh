@@ -9,7 +9,7 @@ liste=$(find $1)
 #use the for function to write the tree in a temporary file with the right format
 for i in $liste
 do
-	dh=$(stat -c "%y" $i | cut -f 1-2 -d " ")
+	dh=$(stat --format="%s %n" $i | cut -f 1 -d " ")
 	if [ -d $i ]
 	then
 		#write the folder like : totofolder d
