@@ -26,7 +26,7 @@ do
 			#Ask the user to choose between two modifications in conflict
 			echo -e  "Veuillez choisir entre 1 et 2 pour continuer\n"
 			echo 1 $(sed -n "${k}p" $1)
-			echo 2 $(grep "$var" $2) #bugg if grep find two lines in $2
+			echo 2 $(grep "$var" $2)
 			while [ $answer -ne 1 ] && [ $answer -ne 2 ]
 			do
 				read answer
@@ -45,21 +45,22 @@ do
 	fi
 done
 
+#Checks if there are lines left in the file $2 that were not written to the output file
 for i in $(cat $2 | cut -f 1 -d " ")
 do
         var=$(echo $i | cut -c 2- )
         k=$(($k + 1))
 
-        #Check if there is a conflict between the diff files
         if  grep "$var" $1
         then
-		j++
+		j++ 2>/dev/null
 	else
 		echo $(sed -n "${k}p" $2) $(echo $2 | rev | cut -c 1 ) >> synchmodif
 	fi
 done
 
 sort -o synchmodif synchmodif 2>/dev/null
+
 
 #Debugging purposes
 echo "fichier synchmodif :"
