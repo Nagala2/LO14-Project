@@ -15,7 +15,7 @@ do
 		#write the folder like : totofolder d
 		echo $(echo $i | cut -f 2- -d "/") d >> temp
 	else
-		#write the file like : totofolder/tatafile yy-mm-dd hh:mm:ss
+		#write the file like : totofolder/tatafile size_in_byte
 		echo $(echo $i | cut -f 2- -d "/") $dh >> temp
 	fi
 done

@@ -1,7 +1,7 @@
 
-#take the two masters files in arguments (like A,B or S) in order to compare it
+#take the two tree files in arguments (like treeA,treeS or oldA) in order to compare it
 
-#create a temporary file with only line like : +./toto/tata yy-mm-dd hh:mm:ss or -./ :
+#create a temporary file with only line like : +./toto/tata size_in_bytes or -./ :
 diff -u $1 $2 | grep "^[+-].*" | tail -n +3 > temp
 sort -o temp temp
 #cat temp
